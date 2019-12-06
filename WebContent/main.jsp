@@ -15,7 +15,7 @@
 	<%
 		String userID =null;
 		if(session.getAttribute("userID") != null){
-			userID = (String) session.getAttribute("id");
+			userID = (String) session.getAttribute("userID");
 		}
 	%>
 
