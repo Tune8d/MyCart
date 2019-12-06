@@ -59,7 +59,7 @@ public class UserMemberJoinAction implements Action {
 			out.close();	
 		}else {
 			System.out.println("여기는 오니?");
-			session.setAttribute("id", col1);
+			session.setAttribute("userID", col1);
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
