@@ -71,6 +71,10 @@
 					</div>
 					<input type="submit" class="btn btn-primary form-control"
 						value="로그인">
+					<div>&nbsp;</div>
+					<div id="info" align="center">		
+					<a href="idFind.jsp" class="id">아이디 찾기</a>&nbsp;&nbsp;  	<a href="idFind.jsp" class="pw">비밀번호 찾기</a>
+					</div>
 				</form>
 			</div>
 		</div>
