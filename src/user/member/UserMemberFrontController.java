@@ -51,7 +51,11 @@ public class UserMemberFrontController extends HttpServlet {
 		} else if (command.equals("/joinAction.go")) {
 			action = new UserMemberJoinAction();
 			forward = action.execute(request, response);
+		} else if(command.equals("/MemberFindPwAction.me")) {
+			action = new MemberFindPwAction();
+			forward = action.execute(request, response);
 		}
+
 
 		RequestDispatcher rd = request.getRequestDispatcher(forward.getPath());
 		rd.forward(request, response);
