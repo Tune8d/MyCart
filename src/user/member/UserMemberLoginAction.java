@@ -29,7 +29,7 @@ public class UserMemberLoginAction implements Action {
 			// admin 용
 			/* if(false) { id = (String) session.getAttribute("id"); } else */
 			forward.setRedirect(true);
-			forward.setPath("./myCartMain.go");
+			forward.setPath("/myCartMain.go");
 			return forward;
 		} 
 		if (id != null) {
