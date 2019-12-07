@@ -50,15 +50,15 @@
 					<h3 style="text-align: center;">회원가입</h3>
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="당신의 아이디"
-							name="userID" maxlength="20">
+							name="userID" maxlength="20" required="required">
 					</div>
 					<div class="form-group">
 						<input type="password" class="form-control" placeholder="비밀번호"
-							name="userPassword" maxlength="20">
+							name="userPassword" maxlength="20" required="required">
 					</div>
 					<div class="form-group">
 						<input type="text" class="form-control"
-							placeholder="당신의 이름을 알려주세요" name="userName" maxlength="20">
+							placeholder="당신의 이름을 알려주세요" name="userName" maxlength="20" required="required">
 					</div>
 					<div class="form-group" style="text-align: center;">
 						<div class="btn-group" data-toggle="buttons">
@@ -73,7 +73,7 @@
 					</div>
 					<div class="form-group">
 						<input type="email" class="form-control" placeholder="이메일"
-							name="userEmail" maxlength="20">
+							name="userEmail" maxlength="20" required="required">
 					</div>
 					<input type="submit" class="btn btn-primary form-control"
 						value="회원가입">
