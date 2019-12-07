@@ -38,26 +38,26 @@ public class UserMemberJoinAction implements Action {
 		userDTO.setUserJoinDate(new Timestamp(System.currentTimeMillis()));		
 		
 		//insert 를 위한 DTO 준비
-		userDAO.join(userDTO);
+		//userDAO.join(userDTO);
 		
-		//회원가입내역 공백 배제
-		if(col1 == null || col2 == null || col3 == null || col4 == null || col5 == null) {
+		//회원가입내역 공백 배제 -> required tag 사용
+		/*
+		 * if(col1 == null || col2 == null || col3 == null || col4 == null || col5 ==
+		 * null) { response.setContentType("text/html; charset=utf-8"); PrintWriter out
+		 * = response.getWriter(); out.println("<script>");
+		 * out.println("alert('모든 정보를 입력해주셨으면 해요');"); out.println("history.back();");
+		 * out.println("</script>"); out.close(); }else
+		 */ 
+		if(userDAO.join(userDTO) == -1){
+			//문자열값 공백 처리 주의하면서쓰자.. text/ht ml 이면 처리가 안된다
 			response.setContentType("text/html; charset=utf-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('모든 정보를 입력해주셨으면 해요');");
-			out.println("history.back();");			
-			out.println("</script>");
-			out.close();	
-		}else if(userDAO.join(userDTO)){
-			response.setContentType("text/ht	ml; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('이미 다른분이 그 아이디를 쓰고 있어요.');");
 			out.println("history.back();");			
 			out.println("</script>");			
 			out.close();	
-		}else {
+		}else if(userDAO.join(userDTO) == 1){
 			System.out.println("여기는 오니?");
 			session.setAttribute("userID", col1);
 			response.setContentType("text/html; charset=utf-8");
