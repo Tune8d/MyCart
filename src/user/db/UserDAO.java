@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -60,14 +61,11 @@ public class UserDAO {
 		return -2; //DB 오류
 	}
 	
-	public boolean join(UserDTO userDTO){
+	public int join(UserDTO userDTO){
 		String sql = null;
-		boolean result = true;
 		try {
 			con = ds.getConnection();
 			sql = "insert into userList values(?, ?, ?, ?, ?, ?, ?)"; //물음표는 따옴표 필요없다...
-
-			
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userDTO.getUserID());
@@ -78,10 +76,13 @@ public class UserDAO {
 			pstmt.setInt(6, userDTO.getUserAdmin());
 			pstmt.setTimestamp(7, userDTO.getUserJoinDate());
 			
-			pstmt.executeUpdate(); 
-			//매개변수 필요없다...
-			
-			result = false;
+			try {
+				pstmt.executeUpdate();
+				return 1;
+			} catch(SQLIntegrityConstraintViolationException id){
+				id.printStackTrace();
+				return -1;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -92,7 +93,7 @@ public class UserDAO {
 				e.printStackTrace();
 			}
 		}
-		return result; //DB 오류
+		return 0;
 	}
 
 }
