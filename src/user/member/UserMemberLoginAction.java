@@ -32,17 +32,7 @@ public class UserMemberLoginAction implements Action {
 			forward.setPath("/myCartMain.go");
 			return forward;
 		} 
-		if (id != null) {
-			response.setContentType("text/html; charset=utf-8");// 안해주면 깨진다
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('이미 로그인이 되어있습니다!');");
-			script.println("</script>");
-			script.close();
-			forward.setRedirect(true);
-			forward.setPath("./myCart.go");
-			return forward;
-		} else if (result == 0) {
+		if (result == 0) {
 			response.setContentType("text/html; charset=utf-8");// 안해주면 깨진다
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
@@ -67,6 +57,16 @@ public class UserMemberLoginAction implements Action {
 			script.println("history.back();");
 			script.println("</script>");
 			script.close();
+		}	else if (id != null) {
+			response.setContentType("text/html; charset=utf-8");// 안해주면 깨진다
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('이미 로그인이 되어있습니다!');");
+			script.println("</script>");
+			script.close();
+			forward.setRedirect(true);
+			forward.setPath("./myCart.go");
+			return forward;
 		}
 
 		return null;
