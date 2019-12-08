@@ -48,16 +48,8 @@ public class UserMemberJoinAction implements Action {
 		 * out.println("alert('모든 정보를 입력해주셨으면 해요');"); out.println("history.back();");
 		 * out.println("</script>"); out.close(); }else
 		 */ 
-		if(userDAO.join(userDTO) == -1){
-			//문자열값 공백 처리 주의하면서쓰자.. text/ht ml 이면 처리가 안된다
-			response.setContentType("text/html; charset=utf-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('이미 다른분이 그 아이디를 쓰고 있어요.');");
-			out.println("history.back();");			
-			out.println("</script>");			
-			out.close();	
-		}else if(userDAO.join(userDTO) == 1){
+		//조건문 순서에 따라 예외발생에 따른 인스턴스 오류 발생되는 듯 함
+		if(userDAO.join(userDTO) == 1){
 			System.out.println("여기는 오니?");
 			session.setAttribute("userID", col1);
 			response.setContentType("text/html; charset=utf-8");
@@ -68,6 +60,15 @@ public class UserMemberJoinAction implements Action {
 			out.println("</script>");			
 			out.close();	
 			return forward;
+		}else if(userDAO.join(userDTO) == -1){
+			//문자열값 공백 처리 주의하면서쓰자.. text/ht ml 이면 처리가 안된다
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('이미 다른분이 그 아이디를 쓰고 있어요.');");
+			out.println("history.back();");			
+			out.println("</script>");			
+			out.close();	
 		}
 		return null;
 	}
