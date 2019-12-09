@@ -95,5 +95,31 @@ public class UserDAO {
 		}
 		return 0;
 	}
-
+	public UserDTO FindPw(String id, String mail) {
+		String sql="";
+		UserDTO dto = null;
+		
+		try {
+			con = ds.getConnection();
+			sql="select * from userList where userID = ? and userEmail=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, mail);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				String email = rs.getString("userEmail"); 
+				
+				if(email.equals(mail)) {
+					dto = new UserDTO();
+					dto.setUserID(rs.getString("userID"));
+					dto.setUserPassword(rs.getString("userPassword"));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}	
 }
