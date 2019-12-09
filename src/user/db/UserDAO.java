@@ -122,4 +122,44 @@ public class UserDAO {
 		}
 		return dto;
 	}	
+	public UserDTO findId(String name, String email) throws SQLException{
+		String sql = null;
+		UserDTO member = null;
+		try {
+			con = ds.getConnection();
+			sql = "select * from userList where userName=? and userEmail=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, name);//첫번째 물음표가 1번 그 다음이 2번 
+			pstmt.setString(2, email);
+			//System.out.println("sql "+ sql);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {		
+				String username =rs.getString("userName");
+				String useremail = rs.getString("userEmail");
+				
+				//System.out.println("username :" + username);
+				//System.out.println("usereamil :"+useremail);
+				
+				if(username.equals(name) && useremail.equals(email)){
+					
+					member = new UserDTO();
+					member.setUserID(rs.getString("userID"));
+				}
+			}
+		
+		}catch(Exception e){
+			e.printStackTrace();
+		}	finally{
+			try{
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			}catch(Exception ex) {}
+		}
+		
+		return member;
+	}
+	
 }
