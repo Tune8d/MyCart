@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="header.jsp" />
-<link rel="stylesheet" href="css/stylesheet_member.css">
+<jsp:include page="template/header.jsp" />
+ <!-- 본문 시작  -->       
 	<!-- 본문 가입창 시작-->
 	<div class="row backgroundimg">
 		<div class="container">
@@ -40,6 +40,7 @@
 						<div class="form-group">
 							<input type="email" class="form-control" placeholder="이메일"
 								name="userEmail" maxlength="20" required="required">
+							<span>* 이메일을 통해서만 아이디 / 비밀번호 조회가 가능하니, 사용하시는 이메일로 입력해주시길 바랍니다.</span>	
 						</div>
 						<input type="submit" class="btn btn-primary form-control"
 							value="회원가입">
@@ -50,5 +51,6 @@
 			<div class="col-lg-1"></div>
 		</div>
 	</div>
+	<!-- 본문 로그인창 끝-->
  <!-- 본문 끝 -->
-<jsp:include page="footer.jsp" />
+<jsp:include page="template/footer.jsp" />
