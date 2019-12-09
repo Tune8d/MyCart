@@ -9,6 +9,25 @@
 <title>MyCart - 로그인</title>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
+<script type="text/javascript">
+function check(){
+	var id=loginform.userID.value;
+	var pass=loginform.userPassword.value;
+	
+	if(id.length == 0){
+		alert("아이디를 입력하세요.");
+		loginform.userID.focus();
+		return false;
+	}
+	if(pass.length == 0){
+		alert("비밀번호를 입력하세요.");
+		loginform.userPassword.focus();
+		return false;
+	}
+	
+	return true;
+}
+</script>
 </head>
 <body>
 	<!-- 상단 네비게이션 시작 -->
@@ -45,7 +64,7 @@
 		<div class="col-lg-4"></div>
 		<div class="col-lg-4">
 			<div class="jumbotron" style="padding-top: 20px;">
-				<form method="post" action="./loginAction.go">
+				<form method="post" action="./loginAction.go" name="loginform" onsubmit="return check()">
 					<h2 style="text-align: center;">MyCart</h2>
 					<h3 style="text-align: center;">지금 담아보세요</h3>
 					<div class="form-group">
