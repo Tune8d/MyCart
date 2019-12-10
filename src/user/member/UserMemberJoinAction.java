@@ -48,7 +48,6 @@ public class UserMemberJoinAction implements Action {
 		 * out.println("alert('모든 정보를 입력해주셨으면 해요');"); out.println("history.back();");
 		 * out.println("</script>"); out.close(); }else
 		 */ 
-		//조건문 순서에 따라 예외발생에 따른 인스턴스 오류 발생되는 듯 함
 		if(userDAO.join(userDTO) == 1){
 			System.out.println("여기는 오니?");
 			session.setAttribute("userID", col1);
@@ -56,10 +55,10 @@ public class UserMemberJoinAction implements Action {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('회원가입에 성공하였습니다.');");
-			out.println("location.href='./myCart.go';");
+			out.println("location.href='./myCartMain.go';");
 			out.println("</script>");			
 			out.close();	
-			return forward;
+			return null;
 		}else if(userDAO.join(userDTO) == -1){
 			//문자열값 공백 처리 주의하면서쓰자.. text/ht ml 이면 처리가 안된다
 			response.setContentType("text/html; charset=utf-8");
