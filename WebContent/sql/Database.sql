@@ -1,10 +1,10 @@
 drop table userList purge;
 
 create table userList(
-	userID varchar2(20),
-	userPassword varchar(20),
+	userID varchar2(20) is null primary key,
+	userPassword varchar2(20),
 	userName varchar2(20),
-	userGender varchar(20),
+	userGender varchar2(20),
 	userEmail varchar2(20),
 	userAdmin number(2),
 	userJoinDate DATE
@@ -39,3 +39,18 @@ ALTER TABLE userList DROP PRIMARY KEY DROP INDEX;
 
 ALTER TABLE userList ADD CONSTRAINT user_ID PRIMARY KEY (userID)
 
+drop table userMyTableBoard purge;
+
+create table userMyTableBoard(
+	boardID number(10),
+	boardTitle varchar2(100) not null,
+	boardPrice number(30) not null,
+	boardEa number(10),
+	boardSeller varchar2(30),
+	boardSellerLink varchar2(2000),
+	boardDate DATE,
+	boardAvailable number(1), --글 삭제 구분 
+	boardUserID varchar2(20) -- references userList(userID); 이걸 session.param 으로 받아서 join 기준으로 삼으면 되겠다 --제약을 인라인으로 정의할 경우 foreign key 가 필요없다고 함
+);
+
+select * from userMyTableBoard;
