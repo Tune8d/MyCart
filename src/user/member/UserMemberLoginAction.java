@@ -25,45 +25,44 @@ public class UserMemberLoginAction implements Action {
 		int result = userDAO.logIn(id, pw);
 
 		if (result == 1) {
+			PrintWriter out = response.getWriter();
 			session.setAttribute("userID", id);
-			// admin 용
-			/* if(false) { id = (String) session.getAttribute("id"); } else */
-			forward.setRedirect(true);
-			forward.setPath("/myCartMain.go");
-			return forward;
+			out.println("<script>");
+			out.println("location.href='./myCart.go';"); //접속자 MyTable
+			out.println("</script>");
+			out.close();
 		} 
 		if (result == 0) {
 			response.setContentType("text/html; charset=utf-8");// 안해주면 깨진다
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			// 서블릿에서 js 사용을 위해 작은따옴표를 사용가능하게 한 것인가.
-			script.println("alert('비밀번호가 틀렸습니다.');");
-			script.println("history.back();");
-			script.println("</script>");
-			script.close();
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('비밀번호가 틀렸습니다.');");
+			out.println("history.back();");
+			out.println("</script>");
+			out.close();
 		} else if (result == -1) {
 			response.setContentType("text/html; charset=utf-8");
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('존재하지 않는 아이디입니다..');");
-			script.println("history.back();");
-			script.println("</script>");
-			script.close();
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('존재하지 않는 아이디입니다..');");
+			out.println("history.back();");
+			out.println("</script>");
+			out.close();
 		} else if (result == -2) {
 			response.setContentType("text/html; charset=utf-8");
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('UNKNOWN ERROR');");
-			script.println("history.back();");
-			script.println("</script>");
-			script.close();
-		}	else if (id != null) {
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('UNKNOWN ERROR');");
+			out.println("history.back();");
+			out.println("</script>");
+			out.close();
+		} else if (id != null) {
 			response.setContentType("text/html; charset=utf-8");// 안해주면 깨진다
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('이미 로그인이 되어있습니다!');");
-			script.println("</script>");
-			script.close();
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('이미 로그인이 되어있습니다!');");
+			out.println("</script>");
+			out.close();
 			forward.setRedirect(true);
 			forward.setPath("./myCart.go");
 			return forward;
