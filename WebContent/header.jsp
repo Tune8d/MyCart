@@ -11,7 +11,7 @@
 <script src="js/bootstrap.js"></script>
 <link rel="stylesheet" href="css/stylesheet_header.css">
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-</head>
+</head>	
 <body>
 	<%
 		String userID = null;
@@ -34,9 +34,7 @@
 			</div>
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li><a href="board.jsp">쇼핑목록</a></li>
-				</ul>
+
 				<%
 					if (userID == null) {
 				%>
@@ -56,17 +54,21 @@
 	<%
 		} else {
 	%>
+	<ul class="nav navbar-nav">
+		<li><a href="board.jsp">MyTable</a></li>
+	</ul>
 	<ul class="nav navbar-nav navbar-right">
 		<li class="dropdown"><a href="#" class="dropdown-toggle"
 			data-toggle="dropdown" role="button" aria-haspopup="true"
 			aria-expanded="false">회원관리<span class="caret"></span></a>
 			<ul class="dropdown-menu">
-				<li><a href="logout.jsp">로그아웃</a></li>
+				<li style="text-align:center">${userID} 님, 안녕!</li>
+				<li style="text-align:center"><a href="logout.jsp">로그아웃.. 안녕히가세요</a></li>
 			</ul></li>
 	</ul>
-			</div>
+	</div>
 	</nav>
-</div>
+	</div>
 
 	<%
 		}
