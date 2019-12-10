@@ -25,14 +25,15 @@ public class UserMemberLoginAction implements Action {
 		int result = userDAO.logIn(id, pw);
 
 		if (result == 1) {
-			PrintWriter out = response.getWriter();
+			//PrintWriter out = response.getWriter();
 			session.setAttribute("userID", id);
-			out.println("<script>");
-			out.println("location.href='./myCart.go';"); //접속자 MyTable
-			out.println("</script>");
-			out.close();
-		} 
-		if (result == 0) {
+			//out.println("<script>");
+			//out.println("location.href='./myCart.go';"); //접속자 MyTable
+			//out.println("</script>");
+			//out.close();
+			forward.setRedirect(true);
+			forward.setPath("/myCart.go");
+		} else if (result == 0) {
 			response.setContentType("text/html; charset=utf-8");// 안해주면 깨진다
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
@@ -64,11 +65,10 @@ public class UserMemberLoginAction implements Action {
 			out.println("</script>");
 			out.close();
 			forward.setRedirect(true);
-			forward.setPath("./myCart.go");
-			return forward;
+			forward.setPath("/myCart.go");
 		}
 
-		return null;
+		return forward;
 	}
 
 }
