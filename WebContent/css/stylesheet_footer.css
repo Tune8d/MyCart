@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;	
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 70px;
+  background-color: #e2e2e2;
+  text-align: center;
+}
