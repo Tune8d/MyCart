@@ -38,7 +38,9 @@
 				<%
 					if (userID == null) {
 				%>
+				
 				<ul class="nav navbar-nav navbar-right">
+					<li><a href="help.jsp">도움말<span class="glyphicon glyphicon-question-sign"></span></a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-haspopup="true"
 						aria-expanded="false"><span>접속하기</span><span class="caret"></span></a>
@@ -58,12 +60,13 @@
 		<li><a href="board.jsp">MyTable</a></li>
 	</ul>
 	<ul class="nav navbar-nav navbar-right">
+		<li><a href="help.jsp">도움말<span class="glyphicon glyphicon-question-sign"></span></a></li>
 		<li class="dropdown"><a href="#" class="dropdown-toggle"
 			data-toggle="dropdown" role="button" aria-haspopup="true"
 			aria-expanded="false">회원관리<span class="caret"></span></a>
 			<ul class="dropdown-menu">
 				<li style="text-align:center">${userID} 님, 안녕!</li>
-				<li style="text-align:center"><a href="logout.jsp">로그아웃.. 안녕히가세요</a></li>
+				<li style="text-align:center"><a href="logout.jsp">로그아웃.. 안녕히 가세요</a></li>
 			</ul></li>
 	</ul>
 	</div>
