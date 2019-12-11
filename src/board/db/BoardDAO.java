@@ -30,6 +30,35 @@ public class BoardDAO {
 		}
 	}
 	
+	public boolean userIsNew(String id) {
+		String sql = null;
+		
+		try {
+			con = ds.getConnection(); 
+			sql = "select * from userMyTableBoard where boardUserID = ?";
+			pstmt = con.prepareStatement(sql);
+
+			System.out.println("작성내역 확인중");
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery(); //아무것도 안가져와도 에러가 안생긴다
+			return rs.next();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (con != null) {con.close();}
+				if (pstmt != null) {pstmt.close();}
+				if (rs != null) {rs.close();}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		return true; //DB 오류
+	}
+	
 	public Timestamp getDate() { //작성시간 기입
 		String sql = null;
 		try {
