@@ -6,14 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-
-import user.db.UserDTO;
 
 public class BoardDAO {
 
@@ -88,28 +84,50 @@ public class BoardDAO {
 		return -1; //DB 오류
 	}
 	
-	
-
-	public Vector read(String id) {
-		
-		//String userID;
-		List<BoardDTO> boardList = new ArrayList<BoardDTO>();
-		List<UserDTO>  userList = new ArrayList<UserDTO> ();
-		Vector vector = new Vector(); //복수의 ArrayList 를 담기 위한것인가?
+	public boolean nextPage(int pageNumber) { //게시글 페이징 처리
 		String sql = null;
-		
 		
 		try {
 			con = ds.getConnection(); 
-			sql = "select * from userMyTableBoard where boardUserID = ?";
+			sql = "select * from userMyTableBoard where boardID < ? and boardAvailable = 1 and boardUserID = ?"; 
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id); //로그인에서부터 readAction 까지 가져온 userID 를 여기에 넣자는 의미. 지금은 땜빵
+			pstmt.setInt(1, getNext() - (pageNumber - 1) * 10); //로그인에서부터 readAction 까지 가져온 userID 를 여기에 넣자는 의미. 지금은 땜빵
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (con != null) {con.close();}
+				if (pstmt != null) {pstmt.close();}
+				if (rs != null) {rs.close();}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		return false; //DB 오류
+		
+	}
+	
+
+	public ArrayList<BoardDTO> read(int pageNumber, String userID) {
+		String sql = null;
+		
+		try {
+			ArrayList<BoardDTO> boardList = new ArrayList<BoardDTO>();
+			con = ds.getConnection(); 
+			sql = "select * from userMyTableBoard where boardID < ?  and boardAvailable = 1 and boardUserID = ?  and rownum <= 10 order by boardID desc";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, getNext() - (pageNumber - 1) * 10); //로그인에서부터 readAction 까지 가져온 userID 를 여기에 넣자는 의미. 지금은 땜빵
+			pstmt.setString(2, userID); //로그인에서부터 readAction 까지 가져온 userID 를 여기에 넣자는 의미. 지금은 땜빵
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) { //로그인한 사람이 이전에 MyTable 을 저장해둔 경우
 				BoardDTO boardDTO = new BoardDTO();
-				UserDTO userDTO = new UserDTO();
-				
 				boardDTO.setBoardID(rs.getInt("boardID"));
 				boardDTO.setBoardTitle(rs.getString("boardTitle"));
 				boardDTO.setBoardPrice(rs.getInt("boardPrice"));
@@ -118,14 +136,12 @@ public class BoardDAO {
 				boardDTO.setBoardSellerLink(rs.getString("boardSellerLink"));
 				boardDTO.setBoardDate(rs.getTimestamp("boardDate"));
 				boardDTO.setBoardAvailable(rs.getInt("boardAvailable"));
-				boardDTO.setBoardUserID(rs.getString("boardUserID"));
+				boardDTO.setBoardUserID(rs.getString(userID));
 				
 				boardList.add(boardDTO);
-
 			}
-			
-			
-			return vector; 
+			System.out.println("읽는중 DAO");
+			return boardList; 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
