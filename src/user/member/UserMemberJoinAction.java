@@ -20,7 +20,7 @@ public class UserMemberJoinAction implements Action {
 		HttpSession session = request.getSession();
 		UserDAO userDAO = new UserDAO();
 		UserDTO userDTO = new UserDTO();
-		ActionForward forward = new ActionForward();
+		ActionForward forward = null;
 		
 		String col1 = request.getParameter("userID");
 		String col2 = request.getParameter("userPassword");
@@ -49,17 +49,16 @@ public class UserMemberJoinAction implements Action {
 		 * out.println("</script>"); out.close(); }else
 		 */ 
 		if(userDAO.join(userDTO) == 1){
-			//System.out.println("여기는 오니?");
+			System.out.println("여기는 오니?");
 			session.setAttribute("userID", col1);
 			response.setContentType("text/html; charset=utf-8");
-			//PrintWriter out = response.getWriter(); // response 를 호출한 시점에서 이미 쫑이 난다... 이후 자바스크립트로 강제 링크 제어를 할 수 밖에 없다는 의미
-			//out.println("<script>");
-			//out.println("alert('회원가입에 성공하였습니다.');");
-			//out.println("location.href='./myCartMain.go';");
-			//out.println("</script>");
-			//out.close();	
-			forward.setRedirect(true);
-			forward.setPath("main.jsp");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('회원가입에 성공하였습니다.');");
+			out.println("location.href='./myCartMain.go';");
+			out.println("</script>");			
+			out.close();	
+			return null;
 		}else if(userDAO.join(userDTO) == -1){
 			//문자열값 공백 처리 주의하면서쓰자.. text/ht ml 이면 처리가 안된다
 			response.setContentType("text/html; charset=utf-8");
@@ -70,7 +69,7 @@ public class UserMemberJoinAction implements Action {
 			out.println("</script>");			
 			out.close();	
 		}
-		return forward;
+		return null;
 	}
 
 }
