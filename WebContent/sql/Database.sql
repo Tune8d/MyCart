@@ -43,7 +43,7 @@ drop table userMyTableBoard purge;
 
 create table userMyTableBoard(
 	boardID number(10),
-	boardTitle varchar2(100) not null,
+	boardTitle varchar2(100),
 	boardPrice number(30) not null,
 	boardEa number(10),
 	boardSeller varchar2(30),
