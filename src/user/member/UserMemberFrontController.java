@@ -1,4 +1,4 @@
-package user.member;
+	package user.member;
 
 import java.io.IOException;
 
@@ -50,23 +50,24 @@ public class UserMemberFrontController extends HttpServlet {
 			forward = action.execute(request, response);
 		} else if (command.equals("/joinAction.go")) {
 			action = new UserMemberJoinAction();
+			//response.sendRedirect(forward.getPath());
 			forward = action.execute(request, response);
 		} else if(command.equals("/MemberFindPwAction.go")) {
 			action = new MemberFindPwAction();
 			forward = action.execute(request, response);
 		} else if (command.equals("/idFindAction.go")) {
-			action = new idFindAction();
-			try {
+\			try {
 			forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} 
 
-		RequestDispatcher rd = request.getRequestDispatcher(forward.getPath());
-		rd.forward(request, response);
+	      if(forward != null) {
+	          RequestDispatcher rd = request.getRequestDispatcher(forward.getPath());
+	          rd.forward(request, response);
+	      }
+	
 	}
-	
-	
 
 }
