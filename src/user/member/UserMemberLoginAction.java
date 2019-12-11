@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import board.db.BoardDAO;
 import user.db.UserDAO;
 
 public class UserMemberLoginAction implements Action {
@@ -18,21 +19,25 @@ public class UserMemberLoginAction implements Action {
 		HttpSession session = request.getSession();
 		ActionForward forward = new ActionForward();
 		UserDAO userDAO = new UserDAO();
+		BoardDAO boardDAO = new BoardDAO();
 
 		String id = request.getParameter("userID");
 		String pw = request.getParameter("userPassword");
 
 		int result = userDAO.logIn(id, pw);
-
+		boolean resultNew = boardDAO.userIsNew(id);
+		
 		if (result == 1) {
-			//PrintWriter out = response.getWriter();
 			session.setAttribute("userID", id);
-			//out.println("<script>");
-			//out.println("location.href='./myCart.go';"); //접속자 MyTable
-			//out.println("</script>");
-			//out.close();
-			forward.setRedirect(true);
-			forward.setPath("/myCart.go");
+			if(resultNew == false) {
+				forward.setRedirect(true);
+				forward.setPath("boardWrite.jsp");
+				return forward;
+			}else if(resultNew == true) {
+				forward.setRedirect(true);
+				forward.setPath("boardRead.jsp");
+				return forward;
+			}
 		} else if (result == 0) {
 			response.setContentType("text/html; charset=utf-8");// 안해주면 깨진다
 			PrintWriter out = response.getWriter();
