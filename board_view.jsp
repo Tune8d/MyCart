@@ -62,11 +62,8 @@
 
 				</tbody>
 			</table>
-			<form action="./delete.tb">
-				<input type="submit" class="btn btn-primary pull-right" value="수정하기">&nbsp;&nbsp;
-			</form>
-				<input type="submit" class="btn btn-primary pull-right" value="삭제하기">
-			<form action="./modify.tb">
+					<a href="./delete.jsp"> 삭제하기 </a>&nbsp;&nbsp;
+				
 				<%
 					BoardDAO boardDAO = new BoardDAO();
 
