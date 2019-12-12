@@ -102,6 +102,37 @@ public class BoardDAO {
 		}
 		return -1; //DB 오류
 	}
+		
+	public boolean delete(int boardID) {
+		String sql = null;
+		int result = 0;
+		try {
+			con = ds.getConnection(); 
+			sql = "delete from userMyTableBoard WHERE boardID=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, boardID);		
+			result = pstmt.executeUpdate();
+			
+			if(result == 0) {
+				return false;
+			}else {
+			
+			return true;}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (con != null) {con.close();}
+				if (pstmt != null) {pstmt.close();}
+				if (rs != null) {rs.close();}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		return false; //DB 오류
+		
+	}
 	
 	public boolean nextPage(int pageNumber) { //게시글 페이징 처리
 		String sql = null;
