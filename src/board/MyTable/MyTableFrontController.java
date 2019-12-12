@@ -49,6 +49,13 @@ public class MyTableFrontController extends HttpServlet {
 			System.out.println("첫 확인");
 			action = new MyTableCheckAction();
 			forward = action.execute(request, response);
+		} else if(command.equals("/MyTableDeleteAction.tb")){
+			action = new MyTableDeleteAction();
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 		}
 
 	      if(forward != null) {
