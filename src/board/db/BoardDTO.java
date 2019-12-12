@@ -7,11 +7,19 @@ public class BoardDTO {
 	private String boardTitle;
 	private int	boardPrice;
 	private int boardEa;
-	private String boardSeller;
+	private String boardMemo;
 	private String boardSellerLink;
+	private String boardTag;
+	public String getBoardTag() {
+		return boardTag;
+	}
+	public void setBoardTag(String boardTag) {
+		this.boardTag = boardTag;
+	}
 	private Timestamp boardDate;
 	private int boardAvailable;
 	private String boardUserID;
+	
 	
 	public int getBoardID() {
 		return boardID;
@@ -37,11 +45,11 @@ public class BoardDTO {
 	public void setBoardEa(int boardEa) {
 		this.boardEa = boardEa;
 	}
-	public String getBoardSeller() {
-		return boardSeller;
+	public String getBoardMemo() {
+		return boardMemo;
 	}
-	public void setBoardSeller(String boardSeller) {
-		this.boardSeller = boardSeller;
+	public void setBoardMemo(String boardMemo) {
+		this.boardMemo = boardMemo;
 	}
 	public String getBoardSellerLink() {
 		return boardSellerLink;

@@ -41,16 +41,27 @@ ALTER TABLE userList ADD CONSTRAINT user_ID PRIMARY KEY (userID)
 
 drop table userMyTableBoard purge;
 
+-- tagging, memo 기능이 추가되었으면 한다.
 create table userMyTableBoard(
 	boardID number(10),
 	boardTitle varchar2(100),
-	boardPrice number(30) not null,
+	boardPrice number(30),
 	boardEa number(10),
-	boardSeller varchar2(30),
+	boardMemo varchar2(2000),
 	boardSellerLink varchar2(2000),
+	boardTag varchar2(50),
 	boardDate DATE,
 	boardAvailable number(1), --글 삭제 구분 
 	boardUserID varchar2(20) -- references userList(userID); 이걸 session.param 으로 받아서 join 기준으로 삼으면 되겠다 --제약을 인라인으로 정의할 경우 foreign key 가 필요없다고 함
 );
 
 select * from userMyTableBoard;
+
+ALTER TABLE userMyTableBoard modify boardTitle null; 
+ALTER TABLE userMyTableBoard modify boardPrice null; 
+ALTER TABLE userMyTableBoard modify boardUserID null; 
+
+select count(*) from userMyTableBoard group by boardUserID;
+select * from (select rownum as rnum, boardTitle, boardPrice, boardEa, boardMemo, boardSellerLink, boardTag from (select * from userMyTableBoard order by boardID desc)) where boardUserID = ? and rnum >=? and rnum <=?;
+select * from userMyTableBoard where boardUserID = 'tester3' order by boardID desc
+select * from (select rownum as rnum, boardTitle, boardPrice, boardEa, boardMemo, boardSellerLink, boardTag (select * from userMyTableBoard order by boardID desc)) where boardUserID = ? and rnum >=? and rnum <=?

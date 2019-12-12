@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import user.member.UserMemberLoginAction;
-
 @WebServlet("*.tb")
 public class MyTableFrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -40,12 +38,16 @@ public class MyTableFrontController extends HttpServlet {
 		Action action = null;
 
 		if (command.equals("/write.tb")) {
-			System.out.println("신규회원...");
+			System.out.println("첫 로그인");
 			action = new MyTableWriteAction();
 			forward = action.execute(request, response);
 		} else if (command.equals("/bring.tb")) {
-			System.out.println("기존회원...");
+			System.out.println("첫 추가");
 			action = new MyTableReadAction();
+			forward = action.execute(request, response);
+		} else if (command.equals("/check.tb")) {
+			System.out.println("첫 확인");
+			action = new MyTableCheckAction();
 			forward = action.execute(request, response);
 		}
 

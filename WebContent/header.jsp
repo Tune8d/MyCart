@@ -30,15 +30,14 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="main.jsp" class="navbar-center">MyCart</a>
-			</div>
-			<div class="collapse navbar-collapse"
-				id="bs-example-navbar-collapse-1">
 
 				<%
 					if (userID == null) {
 				%>
-				
+				<a class="nav navbar-brand" href="main.jsp" class="navbar-center menu">MyCart</a>
+			</div>
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="help.jsp">도움말<span class="glyphicon glyphicon-question-sign"></span></a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -46,7 +45,6 @@
 						aria-expanded="false"><span>접속하기</span><span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="login.jsp">로그인</a></li>
-							<li><a href="join.jsp">회원가입</a></li>
 						</ul></li>
 				</ul>
 			</div>
@@ -56,22 +54,30 @@
 	<%
 		} else {
 	%>
-	<ul class="nav navbar-nav">
-		<li><a href="board.jsp">MyTable</a></li>
+<!-- 	<ul class="nav navbar-nav">
+		<li><a href="boardWrite.jsp" class="menu">MyTable</a></li>
 	</ul>
-	<ul class="nav navbar-nav navbar-right">
+ -->	
+ 			</div>
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+ 
+ <ul class="nav navbar-nav navbar-right">
 		<li><a href="help.jsp">도움말<span class="glyphicon glyphicon-question-sign"></span></a></li>
-		<li class="dropdown"><a href="#" class="dropdown-toggle"
+		<li><a class="nav navbar-brand" href="logout.jsp" class="navbar-center menu"><span class="glyphicon glyphicon-off"></span></a></li>
+<%-- 		<li class="dropdown">
+		<a href="#" class="dropdown-toggle"
 			data-toggle="dropdown" role="button" aria-haspopup="true"
 			aria-expanded="false">회원관리<span class="caret"></span></a>
 			<ul class="dropdown-menu">
 				<li style="text-align:center">${userID} 님, 안녕!</li>
 				<li style="text-align:center"><a href="logout.jsp">로그아웃.. 안녕히 가세요</a></li>
 			</ul></li>
-	</ul>
+ --%>	</ul>
 	</div>
 	</nav>
 	</div>
+	<div class="col-lg-1"></div>
 
 	<%
 		}

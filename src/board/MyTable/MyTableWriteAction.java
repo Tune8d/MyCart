@@ -27,8 +27,9 @@ public class MyTableWriteAction implements Action {
 		String boardTitle = request.getParameter("boardTitle");
 		int boardPrice = Integer.parseInt(request.getParameter("boardPrice"));
 		int boardEa = Integer.parseInt(request.getParameter("boardEa"));
-		String boardSeller= request.getParameter("boardSeller");
+		String boardMemo= request.getParameter("boardMemo");
 		String boardSellerLink = request.getParameter("boardSellerLink");
+		String boardTag = request.getParameter("boardTag");
 		String boardUserID = (String) session.getAttribute("userID");
 		//System.out.printf("@@@=> %s, %d, %d, %s, %s, %s\n", boardTitle, boardPrice, boardEa, boardSeller, boardSellerLink, boardUserID);
 
@@ -54,24 +55,25 @@ public class MyTableWriteAction implements Action {
 			out.println("</script>");			
 			out.close();	
 		}else{
+			boardDTO.setBoardID(boardDAO.getNext());
+			boardDTO.setBoardTitle(boardTitle);
+			boardDTO.setBoardPrice(boardPrice);
+			boardDTO.setBoardEa(boardEa);
+			boardDTO.setBoardMemo(boardMemo);
+			boardDTO.setBoardSellerLink(boardSellerLink);
+			boardDTO.setBoardTag(boardTag);
+			boardDTO.setBoardDate(boardDAO.getDate());
+			boardDTO.setBoardAvailable(1); 
+			boardDTO.setBoardUserID(boardUserID);
+
 			int result = boardDAO.write(boardDTO);
 			
 			if(result == 1) {
-				boardDTO.setBoardID(boardDAO.getNext());
-				boardDTO.setBoardTitle(boardTitle);
-				boardDTO.setBoardPrice(boardPrice);
-				boardDTO.setBoardEa(boardEa);
-				boardDTO.setBoardSeller(boardSeller);
-				boardDTO.setBoardSellerLink(boardSellerLink);
-				boardDTO.setBoardDate(boardDAO.getDate());
-				boardDTO.setBoardAvailable(1); 
-				boardDTO.setBoardUserID(boardUserID);
-				
 				request.setAttribute("data", boardDTO);
 				
 				forward = new ActionForward();
-				forward.setPath("./board_view.jsp");
-				
+				forward.setPath("boardRead.jsp");
+				return forward;
 			}else if(result == -1) {
 				response.setContentType("text/html; charset=utf-8");
 				PrintWriter out = response.getWriter();

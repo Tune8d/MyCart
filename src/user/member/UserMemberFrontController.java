@@ -56,7 +56,7 @@ public class UserMemberFrontController extends HttpServlet {
 			action = new MemberFindPwAction();
 			forward = action.execute(request, response);
 		} else if (command.equals("/idFindAction.go")) {
-\			try {
+		try {
 			forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -6,6 +6,6 @@
          password="tiger"
          driverClassName="oracle.jdbc.driver.OracleDriver"
          url="jdbc:oracle:thin:@localhost:1521:xe"
-         maxActive="500" 
+         maxTotal="500" 
          maxIdle="100"/>  
  </Context>

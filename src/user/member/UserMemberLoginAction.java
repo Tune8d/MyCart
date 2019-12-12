@@ -25,20 +25,20 @@ public class UserMemberLoginAction implements Action {
 		String pw = request.getParameter("userPassword");
 
 		int result = userDAO.logIn(id, pw);
-		boolean resultNew = boardDAO.userIsNew(id);
+		//boolean resultOld = boardDAO.userIsOld(id);
 		
 		if (result == 1) {
 			session.setAttribute("userID", id);
-			if(resultNew == false) {
-				forward.setRedirect(true);
-				forward.setPath("boardWrite.jsp");
-				return forward;
-			}else if(resultNew == true) {
-				forward.setRedirect(true);
-				forward.setPath("boardRead.jsp");
-				return forward;
-			}
-		} else if (result == 0) {
+			forward.setRedirect(true);
+			forward.setPath("boardWrite.jsp");
+			return forward;
+			/*
+			 * if(resultOld == false) { forward.setRedirect(true);
+			 * forward.setPath("boardWrite.jsp"); return forward; }else if(resultOld ==
+			 * true) { forward.setRedirect(true); forward.setPath("/bring.tb"); return
+			 * forward; }
+			 */	
+			} else if (result == 0) {
 			response.setContentType("text/html; charset=utf-8");// 안해주면 깨진다
 			PrintWriter out = response.getWriter();
 			out.println("<script>");

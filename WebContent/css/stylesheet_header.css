@@ -22,15 +22,6 @@ body > .container {
   margin: 20px 0;
 }
 
-.jumbotron {
-	position: absolute;
-	top: 50%;
-	left: 53%;
-	transform: translate(-55%, -45%);
-	border-style:solid;
-	/* font-size: 1vw; */
-}
-
 
 .navbar {
 	height: 60	px;	
@@ -44,7 +35,7 @@ body > .container {
 	color: #000000;
 }
 
-.navbar-brand{
+.nav {
 	font-size: 16px;
 	font-family:"Century Gothic", serif;
 	color: #000000;

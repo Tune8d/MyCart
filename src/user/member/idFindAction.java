@@ -1,12 +1,15 @@
 package user.member;
+import java.io.IOException;
 import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import user.db.UserDAO;
 import user.db.UserDTO;
 
 public class idFindAction implements Action {
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception{	
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{	
 		request.setCharacterEncoding("utf-8");
 		ActionForward forward = new ActionForward();
 		UserDAO userdao = new UserDAO();
@@ -16,7 +19,7 @@ public class idFindAction implements Action {
 		String email = request.getParameter("userEmail");
 		//System.out.println("이름은 "+ name);
 		//System.out.println("이메일은 "+ email);
-		member = userdao.findId(name, email);
+		//member = userdao.findId(name, email);
 		//System.out.println("이름과 이메일: " + member);
 	
 		if (member != null) {
