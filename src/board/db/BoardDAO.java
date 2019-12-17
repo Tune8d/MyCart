@@ -30,25 +30,7 @@ public class BoardDAO {
 			ex.printStackTrace();
 		}
 	}
-	
-	/*
-	 * public boolean userIsOld(String id) { String sql = null;
-	 * 
-	 * try { con = ds.getConnection(); sql =
-	 * "select * from userMyTableBoard where boardUserID = ?"; pstmt =
-	 * con.prepareStatement(sql);
-	 * 
-	 * System.out.println("작성내역 확인중"); pstmt.setString(1, id);
-	 * 
-	 * rs = pstmt.executeQuery(); //아무것도 안가져와도 에러가 안생긴다 return rs.next();
-	 * 
-	 * } catch (SQLException e) { e.printStackTrace(); } finally { try { if (con !=
-	 * null) {con.close();} if (pstmt != null) {pstmt.close();} if (rs != null)
-	 * {rs.close();} } catch (SQLException e) { e.printStackTrace(); }
-	 * 
-	 * } return true; //DB 오류 }
-	 */
-	
+		
 	public Timestamp getDate() { //작성시간 기입
 		String sql = null;
 		try {
@@ -102,37 +84,6 @@ public class BoardDAO {
 		}
 		return -1; //DB 오류
 	}
-		
-	public boolean delete(int boardID) {
-		String sql = null;
-		int result = 0;
-		try {
-			con = ds.getConnection(); 
-			sql = "delete from userMyTableBoard WHERE boardID=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, boardID);		
-			result = pstmt.executeUpdate();
-			
-			if(result == 0) {
-				return false;
-			}else {
-			
-			return true;}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (con != null) {con.close();}
-				if (pstmt != null) {pstmt.close();}
-				if (rs != null) {rs.close();}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
-		}
-		return false; //DB 오류
-		
-	}
 	
 	public boolean nextPage(int pageNumber) { //게시글 페이징 처리
 		String sql = null;
@@ -162,9 +113,6 @@ public class BoardDAO {
 		return false; //DB 오류
 		
 	}
-	
-	
-	
 
 	public ArrayList<BoardDTO> read(int pageNumber, String userID) {
 		String sql = null;
@@ -211,6 +159,41 @@ public class BoardDAO {
 		
 	}
 	
+	public boolean update(BoardDTO boardDTO, int boardID, String id) {
+		String sql = null;
+		try {
+			con = ds.getConnection();
+			sql = "update userMyTableBoard set boardTitle = ?, boardPrice = ?, boardEa = ?, boardSellerLink = ?, boardMemo = ?, boardTag = ?, boardDate = ?, boardAvailable = ? where boardUserID = ? and boardID =?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, boardDTO.getBoardTitle());
+			pstmt.setInt(2, boardDTO.getBoardPrice());
+			pstmt.setInt(3, boardDTO.getBoardEa());
+			pstmt.setString(4, boardDTO.getBoardSellerLink());
+			pstmt.setString(5, boardDTO.getBoardMemo());
+			pstmt.setString(6, boardDTO.getBoardTag());
+			pstmt.setTimestamp(7, boardDTO.getBoardDate());
+			pstmt.setInt(8, boardDTO.getBoardAvailable());
+			pstmt.setString(9, id);
+			pstmt.setInt(10, boardID);
+
+			pstmt.executeUpdate();
+			
+			return true;	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (con != null) {con.close();}
+				if (pstmt != null) {pstmt.close();}
+				if (rs != null) {rs.close();}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false; //DB 오류
+	}
+	
 	public int write(BoardDTO boardDTO) {
 		
 		//String userID;
@@ -253,10 +236,9 @@ public class BoardDAO {
 	public int getListCount(String id) { //총 등재된 쇼핑물품의 갯수
 		int x = 0;
 		String sql = null;
-				
 			try {
 				con = ds.getConnection();
-				sql = "select count(*) from userMyTableBoard where boardUserID = ?";
+				sql = "select count(*) from userMyTableBoard where boardUserID = ? and boardAvailable = 1";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, id);
 				rs = pstmt.executeQuery();
@@ -290,7 +272,7 @@ public class BoardDAO {
 			con = ds.getConnection();
 			
 			//rownum 은 where 에서만 사용되고 끝. 출력되는 게시글의 양을 제어해주는 환경변수.
-			sql = "select * from (select rownum as rnum, boardTitle, boardPrice, boardEa, boardMemo, boardSellerLink, boardTag, boardDate, boardAvailable ,boardUserID  from (select * from userMyTableBoard where boardUserID = ? order by boardID desc)) where rnum >=? and rnum <=?";
+			sql = "select * from (select rownum as rnum, boardID, boardTitle, boardPrice, boardEa, boardMemo, boardSellerLink, boardTag, boardDate, boardAvailable ,boardUserID  from (select * from userMyTableBoard where boardUserID = ? and boardAvailable = 1 order by boardID desc)) where rnum >=? and rnum <=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userID);
 			pstmt.setInt(2, startrow);
@@ -299,7 +281,8 @@ public class BoardDAO {
 			
 			while(rs.next()) {
 				BoardDTO board = new BoardDTO();
-				board.setBoardID(rs.getInt("rnum"));
+				board.setBoardNumber(rs.getInt("rnum"));
+				board.setBoardID(rs.getInt("boardID"));
 				board.setBoardTitle(rs.getString("boardTitle"));
 				board.setBoardPrice(rs.getInt("boardPrice"));
 				board.setBoardEa(rs.getInt("boardEa"));
@@ -326,6 +309,186 @@ public class BoardDAO {
 			}
 		}
 	
+		
+		
+		return null;
+	}
+	
+	public int getBoardListSum(String userID) {
+		String sql = null;
+		
+		int sum = 0; //읽기 시작할 row 번호.
+		
+		try {
+			con = ds.getConnection();
+			
+			sql = "select boardPrice*boardEa as PriceSum from userMyTableBoard where boardUserID = ? and boardAvailable = 1";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userID);
+			rs = pstmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				sum = rs.getInt("PriceSum");
+			}
+			
+			return sum;
+			
+		} catch (SQLException e) {
+			System.out.println("getBoardList 에러 : " + e);
+			e.printStackTrace();
+		}finally {
+			try {
+				if (con != null) {con.close();}
+				if (pstmt != null) {pstmt.close();}
+				if (rs != null) {rs.close();}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return -1;
+	}
+	
+	public int getBoardListAvg(String userID) {
+		String sql = null;
+		
+		int sum = 0; //읽기 시작할 row 번호.
+		
+		try {
+			con = ds.getConnection();
+			
+			sql = "select avg(boardPrice) as priceAvg from userMyTableBoard where boardUserID = ? and boardAvailable = 1 group by boardUserID";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userID);
+			rs = pstmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				sum = rs.getInt("PriceAvg");
+			}
+			
+			return sum;
+			
+		} catch (SQLException e) {
+			System.out.println("getBoardList 에러 : " + e);
+			e.printStackTrace();
+		}finally {
+			try {
+				if (con != null) {con.close();}
+				if (pstmt != null) {pstmt.close();}
+				if (rs != null) {rs.close();}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return -1;
+	}
+	
+	public int getBoardListItems(String userID) {
+		String sql = null;
+		
+		int sum = 0; //읽기 시작할 row 번호.
+		
+		try {
+			con = ds.getConnection();
+			
+			sql = "select sum(boardEa) as noOfItems from userMyTableBoard where boardUserID = ? and boardAvailable = 1 group by boardUserID";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userID);
+			rs = pstmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				sum = rs.getInt("noOfItems");
+			}
+			
+			return sum;
+			
+		} catch (SQLException e) {
+			System.out.println("getBoardList 에러 : " + e);
+			e.printStackTrace();
+		}finally {
+			try {
+				if (con != null) {con.close();}
+				if (pstmt != null) {pstmt.close();}
+				if (rs != null) {rs.close();}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return -1;
+	}
+
+	public boolean delete(int boardID, String id) {
+		String sql = null;
+		try {
+			con = ds.getConnection(); 
+			sql = "update userMyTableBoard set boardAvailable = ? where boardID = ? and boardUserID =?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, 0);
+			pstmt.setInt(2, boardID);
+			pstmt.setString(3, id);
+			
+			pstmt.executeUpdate();
+			
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (con != null) {con.close();}
+				if (pstmt != null) {pstmt.close();}
+				if (rs != null) {rs.close();}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		return false; //DB 오류
+		
+	}
+
+	public BoardDTO getDetail(int boardID, String id) {
+		BoardDTO board = null;
+		String sql = null;
+
+		try {
+			con = ds.getConnection(); 
+			sql = "select * from userMyTableBoard where boardID = ? and boardUserID =?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, boardID);
+			pstmt.setString(2, id);
+
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				board = new BoardDTO();
+				board.setBoardID(rs.getInt("boardID"));
+				board.setBoardTitle(rs.getString("boardTitle"));
+				board.setBoardPrice(rs.getInt("boardPrice"));
+				board.setBoardEa(rs.getInt("boardEa"));
+				board.setBoardMemo(rs.getString("boardMemo"));
+				board.setBoardSellerLink(rs.getString("boardSellerLink"));
+				board.setBoardTag(rs.getString("boardTag"));
+				board.setBoardDate(rs.getTimestamp("boardDate"));
+				board.setBoardAvailable(rs.getInt("boardAvailable"));
+				board.setBoardUserID(rs.getString("boardUserID"));
+			}
+			return board;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (con != null) {con.close();}
+				if (pstmt != null) {pstmt.close();}
+				if (rs != null) {rs.close();}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
 		
 		
 		return null;
