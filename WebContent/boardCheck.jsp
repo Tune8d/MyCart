@@ -42,10 +42,11 @@
 	<form method="post" action="./delete.tb">
 		<div class="panel panel-default" class="col-md-12">
 			<div class="panel-body" style="text-align: center;">
-				<h5>${userID}님의장바구니에등록된물품가짓수: ${listcount}종류</h5>
-				<h5>총액: ${boardListSum } 원</h5>
-				<h5>평균단가: 약 ${boardListAvg } 원</h5>
-				<h5>총갯수: ${boardListItems } 개</h5>
+				<h5>${userID}님의 장바구니에 등록된 물품가짓수: (param 설계 필요)
+				<%--  ${boardlist}종류 = BUY ${}종 + SELL ${ }종 </h5>
+				<h5>기대수익: ${ } 원</h5>
+				<h5>평균매수단가: 약 ${ } 원</h5>
+				<h5>평균매도단가: 약 ${ } 원</h5> --%>
 			</div>
 		</div>
 		<div></div>
@@ -55,27 +56,23 @@
 			<tbody>
 				<tr colspan="2" style="background-color: #333333; color: #eeeeee">
 					<td>No.</td>
-					<!-- 추가하기 뺐으니까 텍스트 에리어를 -->
+					<td>구분</td>
 					<td>상품명</td>
-					<td>가격</td>
-					<td>개수</td>
+					<td>희망가격</td>
+					<td>실제가격</td>
+					<td>#검색필터</td>
+					<td>#포트폴리오</td>
 					<td>Link</td>
-					<td>메모</td>
-					<td>태그</td>
 				</tr>
-				<%
-						for(int i=0;i<boardList.size();i++){
-							BoardDTO boardDTO =(BoardDTO)boardList.get(i);
-					%>
-				<%-- placeholder 도 죄다 null --%>
 				<tr colspan="2">
 					<td><%=boardDTO.getBoardNumber() %></td>
+					<td><%=boardDTO.getBoardType()%></td>
 					<td><a href="./view.tb?boardID=<%= boardDTO.getBoardID()%>"><%=boardDTO.getBoardTitle()%></a></td>
 					<td><%=boardDTO.getBoardPrice()%></td>
 					<td><%=boardDTO.getBoardEa()%></td>
-					<td><a id="hl" href="<%=boardDTO.getBoardSellerLink()%>">Link</a></td>
 					<td><%=boardDTO.getBoardMemo()%></td>
 					<td><%=boardDTO.getBoardTag()%></td>
+					<td><a id="hl" href="<%=boardDTO.getBoardSellerLink()%>">Link</a></td>
 				</tr>
 				<tr>
 					<td><input id="hid" type="hidden"
