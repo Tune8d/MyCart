@@ -322,7 +322,7 @@ public class BoardDAO {
 		try {
 			con = ds.getConnection();
 			
-			sql = "select boardPrice*boardEa as PriceSum from userMyTableBoard where boardUserID = ? and boardAvailable = 1";
+			sql = "select sum(priceSum) as PriceSum from (select boardPrice*boardEa as priceSum from userMyTableBoard where boardUserID = ? and boardAvailable = 1)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userID);
 			rs = pstmt.executeQuery();
@@ -357,14 +357,14 @@ public class BoardDAO {
 		try {
 			con = ds.getConnection();
 			
-			sql = "select avg(boardPrice) as priceAvg from userMyTableBoard where boardUserID = ? and boardAvailable = 1 group by boardUserID";
+			sql = "select sum(priceSum) / sum(boardEa) as priceAvg from (select boardPrice*boardEa as priceSum, boardEa from userMyTableBoard where boardUserID = ? and boardAvailable = 1)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userID);
 			rs = pstmt.executeQuery();
 			
 			
 			while(rs.next()) {
-				sum = rs.getInt("PriceAvg");
+				sum = rs.getInt("priceAvg");
 			}
 			
 			return sum;
