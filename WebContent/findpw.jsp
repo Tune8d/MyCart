@@ -25,15 +25,31 @@ function formSubmit(){
 }
 
 </script>
+<style>
+	#button {
+	width:90px;
+    background-color: #b298e6;
+    border: none;
+    color:#fff;
+    padding: 5px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+</style>
 <body>
-<table width="500px" height="20px" align="center">
+<table width="500px" height="20px">
 	<tr>
 		<td><b>비밀번호 찾기</b></td>
 	</tr>
 </table>
 	
-<form action="./MemberFindPwAction.me" method="post" name="findpw" onclick="return fromSubmit();">
-	<table width="500px" border-collapse="collapse" >
+<form action="./MemberFindPwAction.go" method="post" name="findpw" onclick="return fromSubmit();">
+	<table width="300px" border-collapse="collapse" >
 		<thead>
 			<font size="2">
 			아이디와 주민등록번호를 입력하세요
@@ -68,7 +84,7 @@ function formSubmit(){
 		
 		<tr>
 			<td colspan="2" style="padding: 10px 0 10px 0" align="center">
-				<input type="submit" value="찾기">
+				<input type="submit" value="찾기" id="button">
 			</td>
 		</tr>
 	</table>
