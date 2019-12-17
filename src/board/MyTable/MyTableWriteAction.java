@@ -15,46 +15,28 @@ import board.db.BoardDTO;
 public class MyTableWriteAction implements Action {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		BoardDAO boardDAO = new BoardDAO();
 		BoardDTO boardDTO = new BoardDTO();
 		ActionForward forward = null;
-		
-		//주석처리된 값은 DAO 로 자동처리할 값
-		//int boardID = boardDAO.getNext();
-		String boardTitle = request.getParameter("boardTitle");
+
+		String boardTitle = (String) request.getParameter("boardTitle");
 		int boardPrice = Integer.parseInt(request.getParameter("boardPrice"));
 		int boardEa = Integer.parseInt(request.getParameter("boardEa"));
-		String boardMemo= request.getParameter("boardMemo");
+		String boardMemo = request.getParameter("boardMemo");
 		String boardSellerLink = request.getParameter("boardSellerLink");
 		String boardTag = request.getParameter("boardTag");
 		String boardUserID = (String) session.getAttribute("userID");
-		//System.out.printf("@@@=> %s, %d, %d, %s, %s, %s\n", boardTitle, boardPrice, boardEa, boardSeller, boardSellerLink, boardUserID);
 
-		if(boardUserID == null) {
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('다시 로그인 해주세요');");
-			out.println("history.back();");			
-			out.println("</script>");			
-			out.close();
-		}else if(boardTitle == null) {
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('상품명을 입력해주세요');");
-			out.println("history.back();");			
-			out.println("</script>");			
-			out.close();	
-		}else if(Integer.toString(boardPrice) == null) {
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('가격을 입력해주세요');");
-			out.println("history.back();");			
-			out.println("</script>");			
-			out.close();	
-		}else{
+		// 주석처리된 값은 DAO 로 자동처리할 값
+		// int boardID = boardDAO.getNext();
+		// System.out.printf("@@@=> %s, %d, %d, %s, %s, %s\n", boardTitle, boardPrice,
+		// boardEa, boardSeller, boardSellerLink, boardUserID);
+
+
 			boardDTO.setBoardID(boardDAO.getNext());
 			boardDTO.setBoardTitle(boardTitle);
 			boardDTO.setBoardPrice(boardPrice);
@@ -63,30 +45,31 @@ public class MyTableWriteAction implements Action {
 			boardDTO.setBoardSellerLink(boardSellerLink);
 			boardDTO.setBoardTag(boardTag);
 			boardDTO.setBoardDate(boardDAO.getDate());
-			boardDTO.setBoardAvailable(1); 
+			boardDTO.setBoardAvailable(1);
 			boardDTO.setBoardUserID(boardUserID);
 
 			int result = boardDAO.write(boardDTO);
-			
-			if(result == 1) {
+
+			if (result == 1) {
 				request.setAttribute("data", boardDTO);
-				
+
 				forward = new ActionForward();
 				forward.setPath("boardRead.jsp");
 				return forward;
-			}else if(result == -1) {
+			} else if (result == -1) {
 				response.setContentType("text/html; charset=utf-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
 				out.println("alert('추가 실패');");
-				out.println("history.back();");			
-				out.println("</script>");			
+				out.println("history.back();");
+				out.println("</script>");
 				out.close();
 			}
-		}
-		
-		return forward;
-	}
-	
 
-}
+			return forward;
+		}
+
+
+
+	}
+
