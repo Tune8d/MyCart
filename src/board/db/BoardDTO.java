@@ -4,21 +4,44 @@ import java.sql.Timestamp;
 
 public class BoardDTO {
 	private int boardID;
+	private int boardNumber;
 	private String boardTitle;
 	private int	boardPrice;
 	private int boardEa;
 	private String boardMemo;
 	private String boardSellerLink;
 	private String boardTag;
+	private Timestamp boardDate;
+	private int boardAvailable;
+	private String boardUserID;
+	private int boardListSum;
+	private String boardType;
+
+	public String getBoardType() {
+		return boardType;
+	}
+	public void setBoardType(String boardType) {
+		this.boardType = boardType;
+	}
+	public int getBoardListSum() {
+		return boardListSum;
+	}
+	public void setBoardListSum(int boardListSum) {
+		this.boardListSum = boardListSum;
+	}
+	public int getBoardNumber() {
+		return boardNumber;
+	}
+	public void setBoardNumber(int boardNumber) {
+		this.boardNumber = boardNumber;
+	}
 	public String getBoardTag() {
 		return boardTag;
 	}
 	public void setBoardTag(String boardTag) {
 		this.boardTag = boardTag;
 	}
-	private Timestamp boardDate;
-	private int boardAvailable;
-	private String boardUserID;
+
 	
 	
 	public int getBoardID() {
