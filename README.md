@@ -38,7 +38,7 @@ MyCart 는 한정판 프리미엄 패션물품 판매 서비스인 [StockX](http
 
 ## 설계 및 기능 소개
 <순서도>
-
+![순서도](Meetings/191218_UI_v1.0_SJ.png)
 ## 향후 개선방안
 - Oracle 12c&uarr; 혹은 MySQL 5.7.8&uarr; 로 DB환경 변경 &rarr; json 기반 데이터처리로 [DataTable](https://datatables.net/) 과 연동하여 기능 고도화
 - StringTokenization 활용한 포트폴리오 및 검색조건란 연계 검색 알고리즘 구축
