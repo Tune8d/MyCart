@@ -1,22 +1,14 @@
-#header{
-	background-image: url("../images/back2.png");
-}
 body {
   font-family: 'Lato';
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Century Gothic';
+h1, h2 {
+  font-family: 'Sonar';
   font-weight: 800;
 }
 
 .bg-black {
-  background-color: #000 !important;
+  background-color: #000 ;
 }
 
 .rounded-pill {
@@ -105,13 +97,8 @@ header.masthead .bg-circle-4 {
   border-color: #ee0979;
 }
 
-
-#s1, #s2, #s3 {
-	float:left;
-}
-
 footer{
-	overflow: hidden;
+	clear:both;
   	bottom: 0;	
   	width: 100%;
   	/* Set the fixed height of the footer here */
