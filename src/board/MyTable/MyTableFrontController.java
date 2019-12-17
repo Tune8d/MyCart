@@ -37,12 +37,20 @@ public class MyTableFrontController extends HttpServlet {
 		ActionForward forward = null;
 		Action action = null;
 
-		if (command.equals("/write.tb")) {
-			System.out.println("첫 로그인");
+		if (command.equals("/buy.tb")) {
+			System.out.println("구매품목");
+			forward = new ActionForward();
+			forward.setPath("boardBuyWrite.jsp");
+		}else if (command.equals("/sell.tb")) {
+			System.out.println("판매품목");
+			forward = new ActionForward();
+			forward.setPath("boardSellWrite.jsp");
+		}else if (command.equals("/write.tb")) {
+			System.out.println("품목추가");
 			action = new MyTableWriteAction();
 			forward = action.execute(request, response);
-		} else if (command.equals("/bring.tb")) {
-			System.out.println("첫 추가");
+		}else if (command.equals("/bring.tb")) {
+			System.out.println("계속추가");
 			action = new MyTableReadAction();
 			forward = action.execute(request, response);
 		} else if (command.equals("/check.tb")) {
