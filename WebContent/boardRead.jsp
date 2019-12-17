@@ -8,6 +8,7 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.io.PrintWriter"%>
 <link rel="stylesheet" href="css/stylesheet_board.css">
+<script src="https://code.jquery.com/jquery-latest.js"></script>
 <%
 	BoardDTO boardDTO = (BoardDTO) request.getAttribute("data");
 	int pageNumber = 1;
@@ -26,21 +27,10 @@
 	}
 
 	function listenForDoubleClickLink(element) {
-		var url = document.getElementById('hl').getAttribute('href');
-		document.getElementById("hl").innerHTML = url;
+		document.getElementById("hl").innerHTML = document.getElementById('hl').getAttribute('href');
 		element.contentEditable = true;
-/* 		$('form').click(function(event){
-			document.getElementById('hl').innerHTML  = 'Link';
-		    document.getElementById('hl').href=url;
-		});
- */		setTimeout(function() {
+		setTimeout(function() {
 			if (document.activeElement !== element) {
-/* 				document.getElementById('hl').innerHTML  = 'Link';
-			    document.getElementById('hl').href=url;  
-	//원래는 편집끝나면 다시 돌아가게 하려고 했는데.. 전체 저장시 다시 Link로 표시되게 하는게 나을듯		    
-			    
-			    
-			    */
 				element.contentEditable = false;
 			}	
 		}, 300);	
@@ -59,10 +49,11 @@
 		</div>
 		<div>&nbsp;</div>
 		<div class="col-md-12 text-center">
-			<input type="submit" class="btn	 btn-success" value="추가하기">
-			<input class="btn btn-primary" value="확인하기" onClick="javascript:window.location='./check.tb'">  <!-- 목록 원페이지화 같은거라면 추가 -->
+			<input type="submit" class="btn	 btn-success" value="추가하기"> <input
+				class="btn btn-primary" value="확인하기"
+				onClick="javascript:window.location='./check.tb'">
+			<!-- 목록 원페이지화 같은거라면 추가 -->
 			<!-- 				<input type="submit" class="btn btn-warning" value="수정하기">  클라이언트 처리가 좋을듯.-->
-			<input type="submit" class="btn btn-danger" value="삭제하기">
 		</div>
 		<div>&nbsp;</div>
 		<div>&nbsp;</div>
@@ -84,7 +75,7 @@
 							type="text" class="form-control" placeholder="태그" name="boardTag"
 							maxlength="50"></a></td>
 				</tr>
-				<tr colspan="2'">
+				<tr colspan="2'" id="result">
 					<td onclick="listenForDoubleClick(this);"
 						onblur="this.contentEditable=false;"><%=boardDTO.getBoardTitle()%></td>
 					<td onclick="listenForDoubleClick(this);"
@@ -93,7 +84,7 @@
 						onblur="this.contentEditable=false;"><%=boardDTO.getBoardEa()%></td>
 					<%--<td onclick="listenForDoubleClick(this);" onblur="this.contentEditable=false;"><%=boardDTO.getBoardSellerLink()%></td>--%>
 					<td onclick="listenForDoubleClickLink(this);"
-						onblur="this.contentEditable=false;"><a id ="hl"
+						onblur="this.contentEditable=false;"><a id="hl"
 						href="http://<%=boardDTO.getBoardSellerLink()%>">Link</a></td>
 					<td onclick="listenForDoubleClick(this);"
 						onblur="this.contentEditable=false;"><%=boardDTO.getBoardMemo()%></td>
@@ -103,16 +94,5 @@
 			</tbody>
 		</table>
 	</form>
-	<ul class="pagination">
-		<li><a href="#">1</a></li>
-		<li><a href="#">2</a></li>
-		<li><a href="#">3</a></li>
-		<li><a href="#">4</a></li>
-		<li><a href="#">5</a></li>
-	</ul>
 </div>
-</div>
-</div>
-<!-- 본문 끝 -->
-<jsp:include page="footer.jsp" />
 
