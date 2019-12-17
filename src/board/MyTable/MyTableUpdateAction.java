@@ -34,6 +34,7 @@ public class MyTableUpdateAction implements Action {
 		String boardSellerLink = request.getParameter("boardSellerLink");
 		String boardTag = request.getParameter("boardTag");
 		String boardUserID = (String) session.getAttribute("userID");
+		String boardType = (String) request.getParameter("boardType");
 		
 		boardDTO.setBoardID(boardID);
 		boardDTO.setBoardTitle(boardTitle);
@@ -46,6 +47,7 @@ public class MyTableUpdateAction implements Action {
 		boardDTO.setBoardDate(boardDAO.getDate());
 		boardDTO.setBoardAvailable(1);
 		boardDTO.setBoardUserID(boardUserID);
+		boardDTO.setBoardType(boardType);
 
 		result = boardDAO.update(boardDTO, boardID, boardUserID);
 
