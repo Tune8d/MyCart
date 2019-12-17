@@ -138,6 +138,7 @@ public class BoardDAO {
 				boardDTO.setBoardDate(rs.getTimestamp("boardDate"));
 				boardDTO.setBoardAvailable(rs.getInt("boardAvailable"));
 				boardDTO.setBoardUserID(rs.getString(userID));
+				boardDTO.setBoardType(rs.getString("boardType"));
 				
 				boardList.add(boardDTO);
 			}
@@ -163,7 +164,7 @@ public class BoardDAO {
 		String sql = null;
 		try {
 			con = ds.getConnection();
-			sql = "update userMyTableBoard set boardTitle = ?, boardPrice = ?, boardEa = ?, boardSellerLink = ?, boardMemo = ?, boardTag = ?, boardDate = ?, boardAvailable = ? where boardUserID = ? and boardID =?";
+			sql = "update userMyTableBoard set boardTitle = ?, boardPrice = ?, boardEa = ?, boardSellerLink = ?, boardMemo = ?, boardTag = ?, boardDate = ?, boardAvailable = ?, boardType = ? where boardUserID = ? and boardID =?";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, boardDTO.getBoardTitle());
@@ -174,8 +175,9 @@ public class BoardDAO {
 			pstmt.setString(6, boardDTO.getBoardTag());
 			pstmt.setTimestamp(7, boardDTO.getBoardDate());
 			pstmt.setInt(8, boardDTO.getBoardAvailable());
-			pstmt.setString(9, id);
-			pstmt.setInt(10, boardID);
+			pstmt.setString(9, boardDTO.getBoardType());
+			pstmt.setString(10, id);
+			pstmt.setInt(11, boardID);
 
 			pstmt.executeUpdate();
 			
@@ -200,7 +202,7 @@ public class BoardDAO {
 		String sql = null;
 		try {
 			con = ds.getConnection(); 
-			sql = "insert into userMyTableBoard values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			sql = "insert into userMyTableBoard values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setInt(1, boardDTO.getBoardID());
@@ -213,6 +215,7 @@ public class BoardDAO {
 			pstmt.setTimestamp(8, boardDTO.getBoardDate());
 			pstmt.setInt(9, boardDTO.getBoardAvailable()); //boardAvailable; 처음 작성시 글은 보여진다는 의미. 
 			pstmt.setString(10, boardDTO.getBoardUserID()); //로그인에서부터 readAction 까지 가져온 userID 를 여기에 넣자는 의미. 지금은 땜빵
+			pstmt.setString(11, boardDTO.getBoardType());
 			
 			pstmt.executeUpdate();
 			
@@ -265,14 +268,14 @@ public class BoardDAO {
 		String sql = null;
 		List list = new ArrayList();
 		
-		int startrow=(page-1)*10+1; //읽기 시작할 row 번호.
+		int startrow=(page-1)*5+1; //읽기 시작할 row 번호.
 		int endrow=startrow+limit-1; //읽을 마지막 row 번호.	
 		
 		try {
 			con = ds.getConnection();
 			
 			//rownum 은 where 에서만 사용되고 끝. 출력되는 게시글의 양을 제어해주는 환경변수.
-			sql = "select * from (select rownum as rnum, boardID, boardTitle, boardPrice, boardEa, boardMemo, boardSellerLink, boardTag, boardDate, boardAvailable ,boardUserID  from (select * from userMyTableBoard where boardUserID = ? and boardAvailable = 1 order by boardID desc)) where rnum >=? and rnum <=?";
+			sql = "select * from (select rownum as rnum, boardID, boardTitle, boardPrice, boardEa, boardMemo, boardSellerLink, boardTag, boardDate, boardAvailable ,boardUserID, boardType  from (select * from userMyTableBoard where boardUserID = ? and boardAvailable = 1 order by boardID desc)) where rnum >=? and rnum <=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userID);
 			pstmt.setInt(2, startrow);
@@ -292,6 +295,7 @@ public class BoardDAO {
 				board.setBoardDate(rs.getTimestamp("boardDate"));
 				board.setBoardAvailable(rs.getInt("boardAvailable"));
 				board.setBoardUserID(rs.getString("boardUserID")); //여기서 세션과 바꿔치기.
+				board.setBoardType(rs.getString("boardType"));
 				
 				list.add(board);
 			}
@@ -475,6 +479,7 @@ public class BoardDAO {
 				board.setBoardDate(rs.getTimestamp("boardDate"));
 				board.setBoardAvailable(rs.getInt("boardAvailable"));
 				board.setBoardUserID(rs.getString("boardUserID"));
+				board.setBoardType(rs.getString("boardType"));
 			}
 			return board;
 		} catch (SQLException e) {
