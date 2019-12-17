@@ -1,45 +1,40 @@
 package board.MyTable;
 
-import java.io.PrintWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import board.db.BoardDAO;
 
 public class MyTableDeleteAction implements Action {
+
+	@Override
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		BoardDAO boardDAO = new BoardDAO();
+		HttpSession session=request.getSession();
+		ActionForward forward = new ActionForward();
+		int boardID = Integer.parseInt(request.getParameter("boardID"));
+		String id= (String) session.getAttribute("userID");
+
+		boolean result = false;
+		
+		result = boardDAO.delete(boardID, id);
+		
+		if(result == false) {
+			System.out.println("삭제실패");
+		}
+		
+		forward.setRedirect(true);
+		forward.setPath("check.tb");
 	
-	 public ActionForward execute(HttpServletRequest request,HttpServletResponse response) throws Exception{
-		 
-		 request.setCharacterEncoding("utf-8");
-		 
-		 ActionForward forward = new ActionForward();
-
-		 boolean result = false;
-		 boolean boardNumCheck = false;
-		 int boardID = Integer.parseInt(request.getParameter("boardID"));
-		 System.out.println("보드 아이디넘버:"+ boardID);
-		 System.out.println("보드테이블 파라메터:"+boardID);
-		 BoardDAO boarddao = new BoardDAO();
-		/*
-		 * boardNumCheck =
-		 * boarddao.isBoardNumber(Integer.parseInt(request.getParameter("boardID")));
-		 */	   	
-		/*
-		 * if(boardNumCheck == false){
-		 * 
-		 * return null; }
-		 */
-	   	
-		 result = boarddao.delete(boardID);
-
-	   	if(result ==false) {
-	   		System.out.println("delete fail");
-	   		return null;
-	   	}
-		 System.out.println("게시판 삭제 성공");
-		 forward.setRedirect(true);
-		 forward.setPath("/board.jsp");
-		 return forward;
+		return forward;
 	}
+
 }
