@@ -44,13 +44,13 @@
 
 		<div class="panel panel-default" class="col-md-12">
 			<div class="panel-body" style="text-align: center;">
-				<h2>${userID}님의 장바구니</h2>
+				<h2>${userID}님의장바구니</h2>
 			</div>
 		</div>
 		<div>&nbsp;</div>
 		<div class="col-md-12 text-center">
-			<input type="submit" class="btn	 btn-success" value="추가하기"> <input
-				class="btn btn-primary" value="확인하기"
+			<input type="submit" class="btn	 btn-success" value="추가하기">
+			<input class="btn btn-primary" value="확인하기"
 				onClick="javascript:window.location='./check.tb'">
 			<!-- 목록 원페이지화 같은거라면 추가 -->
 			<!-- 				<input type="submit" class="btn btn-warning" value="수정하기">  클라이언트 처리가 좋을듯.-->
@@ -61,38 +61,43 @@
 			style="text-align: center; border: 1px solid #dddddd">
 			<tbody>
 				<tr colspan="2">
+					<td class="dropdown">
+						<%-- td 안에 div 섞이면 잘 안된다. --%> <select name="boardType">
+							<option>BUY</option>
+							<%-- value 가 없어야 box 값이 들어간다..	 --%>
+							<option>SELL</option>
+					</select>
+					</td>
 					<td><input type="text" class="form-control" placeholder="상품명"
 						name="boardTitle" maxlength="50"></td>
-					<td><input type="text" class="form-control" placeholder="가격"
-						name="boardPrice" maxlength="30"></td>
-					<td><input type="text" class="form-control" placeholder="개수"
-						name="boardEa" maxlength="10"></td>
+					<td><input type="text" class="form-control"
+						placeholder="매수희망가  or 매도희망가" name="boardPrice" maxlength="30"></td>
+					<td><input type="text" class="form-control"
+						placeholder="최저매수가 or 최고매도가" name="boardEa" maxlength="10"></td>
+					<td><input type="text" class="form-control"
+						placeholder="#검색필터" name="boardMemo" maxlength="50"></td>
+					<td><input type="text" class="form-control"
+						placeholder="#포트폴리오 tag" name="boardTag" maxlength="50"></td>
 					<td><input type="text" class="form-control"
 						placeholder="쇼핑몰 링크" name="boardSellerLink" maxlength="50"></td>
-					<td><input type="text" class="form-control" placeholder="메모"
-						name="boardMemo" maxlength="50"></td>
-					<td><a href="#" data-toggle="tooltip" title="#으로 태그 추가 가능"><input
-							type="text" class="form-control" placeholder="태그" name="boardTag"
-							maxlength="50"></a></td>
 				</tr>
 				<tr colspan="2'" id="result">
-					<td onclick="listenForDoubleClick(this);"
-						onblur="this.contentEditable=false;"><%=boardDTO.getBoardTitle()%></td>
-					<td onclick="listenForDoubleClick(this);"
-						onblur="this.contentEditable=false;"><%=boardDTO.getBoardPrice()%></td>
+					<td><%=boardDTO.getBoardType() %></td>
+					<td><%=boardDTO.getBoardTitle()%></td>
+					<td><%=boardDTO.getBoardPrice()%></td>
 					<td onclick="listenForDoubleClick(this);"
 						onblur="this.contentEditable=false;"><%=boardDTO.getBoardEa()%></td>
-					<%--<td onclick="listenForDoubleClick(this);" onblur="this.contentEditable=false;"><%=boardDTO.getBoardSellerLink()%></td>--%>
-					<td onclick="listenForDoubleClickLink(this);"
-						onblur="this.contentEditable=false;"><a id="hl"
-						href="http://<%=boardDTO.getBoardSellerLink()%>">Link</a></td>
 					<td onclick="listenForDoubleClick(this);"
 						onblur="this.contentEditable=false;"><%=boardDTO.getBoardMemo()%></td>
 					<td onclick="listenForDoubleClick(this);"
 						onblur="this.contentEditable=false;"><%=boardDTO.getBoardTag()%></td>
+					<td onclick="listenForDoubleClickLink(this);"
+						onblur="this.contentEditable=false;"><a id="hl"
+						href="http://<%=boardDTO.getBoardSellerLink()%>">Link</a></td>
 				</tr>
 			</tbody>
 		</table>
+
 	</form>
 </div>
 
