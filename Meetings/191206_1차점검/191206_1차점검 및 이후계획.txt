@@ -1,0 +1,31 @@
+﻿1. 진행현황: 로그인 모듈 기능구현 및 bootstrap 활용한 기본 레이아웃 적용 링크: https://github.com/Tune8d/MyCart.git
+  A. 문제점 : 회원가입 시 오라클 DB 에 중복되어서 저장
+     1) 로그아웃기능 미구현 -> ShoppingMall 소스처럼 서블릿 활용한 세션 처리로 로그인 전후 처리를 통한 페이지 UI 구현 필요 
+        a. 로그인 이후 landing page (즉, 본 모듈의 제일 최종점) 인 main.jsp 에 대한 의견 필요
+     2) 오라클 DB 의 고질적인 문제로 v11.0.2 에 오면서까지 trigger 문을 활용한 복합쿼리문으로 해결
+        a. 스택오버플로우 관련 질의: https://stackoverflow.com/questions/1702832/insert-if-not-exists-oracle
+        b. 복합쿼리처리:  http://guyharrison.squarespace.com/blog/2010/1/1/the-11gr2-ignore_row_on_dupkey_index-hint.html
+        --> 얘초에 MyCart 서비스의 핵심 가치가 단순함의 미학을 보여주는 look-and-feel 과 insert 기능인데 후자의 하자를 지닌 오라클 DB를 사용해야할지도 의문
+  B. 대응방안 (오늘 할 것)
+     1) 동언, 병권, 예지 : 로그인 모듈 다듬기
+        a. A-1 을 해결 (1순위, 적어도 5시30분까지 여기에 전념하면 좋겠음)
+           1. 나도 못하는거니까 조금해보고 어렵다 싶으면 선생님께 문의할 것
+        b. A-2 에 대한 고민
+           1. 복합쿼리문 or 다른 방법을 통한 해결이 best
+           2. 오늘끝날때까지 oracle 사용 여부 말해줄 것. 대안은 mySql 생각중 (https://www.mysql.com/downloads/)
+     2) 승주 : 게시판 초안 다듬고 bootstrap 과 jQuery Datatables 활용한 모듈 구현
+        a. 월요일 저녁(12/9(월))까지 완성 생각중
+	* look-and-feel 참고: https://datatables.net/examples/basic_init/filter_only.html
+     3) 지은 : 건강할때까지 쉴 것
+        a. 만약 여력 있다면 공유한 jsp 페이지의 bootstrap 공부하고 CSS 적용방안 고민해볼 것
+
+  C. 다음주 계획
+      1) 12/10(화) ~ 12/11(수): MyTable 모듈 완성. 필요 시 미구현 사항 추가 작업
+      2) 12/11(수) : 모듈통합 
+      3) 12/12(목) : 모듈통합, 시연용 DB 탑재 등 마무리 작업
+      4) 12/13(금) : 시연 및 제출
+
+
+  D. 추가 피드백 
+ - 관계형 DB에서는 transaction 으로 인한 삽입 오류라기 보다는 처리에 있어서 동기화의 문제가 있을 수 는 있음. 이 조건을 제어하기 위한 trigger 인데 잘 쓰지도 않는다. 이를 transaction 상에서의 문제라고 한다
+ - 관계형 DB 는 select 가 목적임. 또한 실무에서의 한명의 delete 는 4000원의 적자. DB의 풀이 IT 회사의 영향력지표인 점을 감안할 시 메리트가 없는 선택지
