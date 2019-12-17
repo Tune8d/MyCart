@@ -49,13 +49,22 @@ public class MyTableFrontController extends HttpServlet {
 			System.out.println("첫 확인");
 			action = new MyTableCheckAction();
 			forward = action.execute(request, response);
-		} else if(command.equals("/MyTableDeleteAction.tb")){
+		} else if (command.equals("/delete.tb")) {
+			System.out.println("삭제하기");
 			action = new MyTableDeleteAction();
-			try{
-				forward=action.execute(request, response);
-			}catch(Exception e){
-				e.printStackTrace();
-			}
+			forward = action.execute(request, response);
+		}else if (command.equals("/update.tb")) {
+			System.out.println("수정하기");
+			action = new MyTableUpdateViewAction();
+			forward = action.execute(request, response);
+		}else if (command.equals("/updateAction.tb")) {
+			System.out.println("수정하기");
+			action = new MyTableUpdateAction();
+			forward = action.execute(request, response);
+		}else if (command.equals("/view.tb")) {
+			System.out.println("상세보기");
+			action = new MyTableViewerAction();
+			forward = action.execute(request, response);
 		}
 
 	      if(forward != null) {
