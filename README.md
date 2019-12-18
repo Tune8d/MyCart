@@ -23,6 +23,8 @@ MyCart 는 한정판 프리미엄 패션물품 판매 서비스인 [StockX](http
   - JDK, JRE 
 * DB
   - Oracle 11g 
+* Server
+  - Tomcat 9.0
   
 ## 개발일정
 * ~12/1(일) : 사전준비
