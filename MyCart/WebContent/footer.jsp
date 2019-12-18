@@ -6,11 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 <meta name="viewport" content="width=device-width" initial-scale="1">
-<title>MyCart - 로그인</title>
+<title>footer</title>
 <link rel="stylesheet" href="css/bootstrap.css">
 <script src="js/bootstrap.js"></script>
 <link rel="stylesheet" href="css/stylesheet_footer.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <footer class="footer">
 	<div class="container">

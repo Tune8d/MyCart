@@ -11,7 +11,7 @@
 <script src="js/bootstrap.js"></script>
 <link rel="stylesheet" href="css/stylesheet_header.css">
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-</head>	
+</head>
 <body>
 	<%
 		String userID = null;
@@ -30,16 +30,17 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-
 				<%
 					if (userID == null) {
 				%>
-				<a class="nav navbar-brand" href="main.jsp" class="navbar-center menu">MyCart</a>
+				<a class="nav navbar-brand" href="main.jsp"
+					class="navbar-center menu">MyCart</a>
 			</div>
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="help.jsp">도움말<span class="glyphicon glyphicon-question-sign"></span></a></li>
+					<li><a href="help.jsp">도움말<span
+							class="glyphicon glyphicon-question-sign"></span></a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-haspopup="true"
 						aria-expanded="false"><span>접속하기</span><span class="caret"></span></a>
@@ -54,26 +55,20 @@
 	<%
 		} else {
 	%>
-<!-- 	<ul class="nav navbar-nav">
+	<!-- 	<ul class="nav navbar-nav">
 		<li><a href="boardWrite.jsp" class="menu">MyTable</a></li>
 	</ul>
- -->	
- 			</div>
-			<div class="collapse navbar-collapse"
-				id="bs-example-navbar-collapse-1">
- 
- <ul class="nav navbar-nav navbar-right">
-		<li><a href="help.jsp">도움말<span class="glyphicon glyphicon-question-sign"></span></a></li>
-		<li><a class="nav navbar-brand" href="logout.jsp" class="navbar-center menu"><span class="glyphicon glyphicon-off"></span></a></li>
-<%-- 		<li class="dropdown">
-		<a href="#" class="dropdown-toggle"
-			data-toggle="dropdown" role="button" aria-haspopup="true"
-			aria-expanded="false">회원관리<span class="caret"></span></a>
-			<ul class="dropdown-menu">
-				<li style="text-align:center">${userID} 님, 안녕!</li>
-				<li style="text-align:center"><a href="logout.jsp">로그아웃.. 안녕히 가세요</a></li>
-			</ul></li>
- --%>	</ul>
+ -->
+	<a class="nav navbar-brand" href="main.jsp" class="navbar-center menu">MyCart</a>
+</div>
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="help.jsp">도움말<span
+					class="glyphicon glyphicon-question-sign"></span></a></li>
+			<li><a class="nav navbar-brand" href="logout.jsp"
+				class="navbar-center menu"><span class="glyphicon glyphicon-off"></span></a></li>
+		</ul>
 	</div>
 	</nav>
 	</div>

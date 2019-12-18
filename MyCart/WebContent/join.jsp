@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="header.jsp" />
 <link rel="stylesheet" href="css/stylesheet_member.css">
-	<!-- 본문 가입창 시작-->
-	<div class="row backgroundimg">
-		<div class="container">
-			<div class="col-lg-1"></div>
-			<div class="col-lg-10">
+<!-- 본문 가입창 시작-->
+<div class="row backgroundimg">
+	<div class="container">
+		<div class="col-lg-1"></div>
+		<div class="col-lg-10">
 			<div class="wrapper">
 				<div class="jumbotron">
 					<form method="post" action="./joinAction.go">
@@ -45,10 +45,10 @@
 							value="회원가입">
 					</form>
 				</div>
-				</div>
 			</div>
-			<div class="col-lg-1"></div>
 		</div>
+		<div class="col-lg-1"></div>
 	</div>
- <!-- 본문 끝 -->
+</div>
+<!-- 본문 끝 -->
 <jsp:include page="footer.jsp" />

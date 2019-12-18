@@ -56,6 +56,7 @@
 			<tbody>
 				<tr colspan="2" style="background-color: #333333; color: #eeeeee">
 					<td>No.</td>
+					<!-- 추가하기 뺐으니까 텍스트 에리어를 -->
 					<td>구분</td>
 					<td>상품명</td>
 					<td>희망가격</td>
@@ -64,6 +65,11 @@
 					<td>#포트폴리오</td>
 					<td>Link</td>
 				</tr>
+				<%
+						for(int i=0;i<boardList.size();i++){
+							BoardDTO boardDTO =(BoardDTO)boardList.get(i);
+					%>
+				<%-- placeholder 도 죄다 null --%>
 				<tr colspan="2">
 					<td><%=boardDTO.getBoardNumber() %></td>
 					<td><%=boardDTO.getBoardType()%></td>

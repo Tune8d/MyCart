@@ -38,6 +38,7 @@
 			</thead>
 			<tbody>
 				<tr colspan="2">
+					<td><%=board.getBoardType() %></td>
 					<td><%=board.getBoardTitle() %></td>
 					<td><%=board.getBoardPrice() %></td>
 					<td><%=board.getBoardEa() %></td>

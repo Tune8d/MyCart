@@ -7,44 +7,50 @@
 <style>
 #header{
 	background-image: url("./images/back2.png");
-	width: 1300px;
+	width: 1700px;
 	height: 400px;
 	display:block;
 	margin: 0 auto;
 }
 	
-#s1, #s3 {
-	display: block;
-	margin-left: 140px;
+#s1 {
+	margin-left: 230px;
 	margin-right: 50px; 
 	float: left;
 	margin-bottom: 50px;
 }
 #s2 {
-	display: block;
-	margin-left: 160px;
+	margin-left: 250px;
 	margin-right: 100px; 
+	margin-bottom: 50px;
+	float: left;
+}
+#s3{
+	margin-left: 230px;
+	margin-right: 50px; 
+	float: left;
 	margin-bottom: 50px;
 }
 
 #i1 {
+	margin-left:160px;
 	width: 280px;
 	height: 360px;
-	margin-left: 160px;
 }
 
 #i2 {
-	width: 340px;
+	width: 390px;
 	height: 230px;
-	margin-left: 160px;
+	margin-left: 230px;
 }
 
 #i3 {
 	width: 330px;
 	height: 70px;
-	margin-left: 130px;
+	margin-left: 230px;
 	margin-right: 100px;
 }
+
 #help {
 	font-family: 'Sonar';
 	font-weight: 900;
@@ -53,6 +59,21 @@
 #use {
 	font-family: 'Century Gothic';
 }
+#home {
+	width:130px;
+    background-color: #b298e6;
+    border: none;
+    color:#fff;
+    padding: 15px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
 	
 </style>
 
@@ -62,7 +83,12 @@
       <div>
         <h1 class="masthead-heading mb-0" align="center" id="help" >Help</h1>
         <h2 class="masthead-subheading mb-0" align="center" id="use">쉽고 빠른 MyCart 사용법</h2>
-      </div>
+			<div>
+				<form action="main.jsp">
+					<input type="submit" value="지금 시작하기" id="home" />
+				</form>
+			</div>
+		</div>
     </div>
   </header>
   
@@ -70,13 +96,15 @@
   <hr/>
   <br>
   
+  <div align="center">
   <img id="i1" src="images/1.PNG"> 
   <img id="i2" src="images/2-1.PNG"> 
   <img id="i3" src="images/4.PNG"> 
+  </div>
   
   <br><br>
   
-  <section id="s1">
+  <section id="s1" >
     <div>
       <div >
         <div >
@@ -128,6 +156,7 @@
       </div>
     </div>
   </section>
+ 
   <br><br>
  <!-- 본문 끝 -->
 <jsp:include page="footer.jsp"/>

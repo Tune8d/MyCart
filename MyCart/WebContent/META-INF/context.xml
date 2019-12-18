@@ -1,11 +1,7 @@
- <Context> 
-     <Resource name="jdbc/OracleDB" 
-         auth="Container"
-         type="javax.sql.DataSource" 
-         username="scott" 
-         password="tiger"
-         driverClassName="oracle.jdbc.driver.OracleDriver"
-         url="jdbc:oracle:thin:@localhost:1521:xe"
-         maxTotal="500" 
-         maxIdle="100"/>  
- </Context>
+
+<Context>
+	<Resource name="jdbc/OracleDB" auth="Container"
+		type="javax.sql.DataSource" username="scott" password="tiger"
+		driverClassName="oracle.jdbc.driver.OracleDriver"
+		url="jdbc:oracle:thin:@localhost:1521:xe" maxTotal="500" maxIdle="100" />
+</Context>

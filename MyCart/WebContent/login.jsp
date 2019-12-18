@@ -22,7 +22,18 @@
         	
         	$('#img').css('background-image: url("./images/back2.png"), width: 1920px, height: 865px');
         	
+        	var popupX = (window.screen.width / 2) - (200 / 2);
+        	var popupY= (window.screen.height /2) - (300 / 2);
+        	
+        	$('.id').click(function(){
+        		window.open('idFind.jsp', 'window_name','width=400,height=250,location=no,status=no,scrollbars=yes, left='+popupX+', top='+popupY);
+        	});
+        	
+        	$('.pw').click(function(){
+        		window.open('findpw.jsp', 'window_nam','width=400,height=250,location=no ,status=no, scrollbars=yes, left='+popupX+', top='+popupY);
+        	});
        });
+     
 </script>
 
 
@@ -82,7 +93,7 @@
 							id="button">
 						<div>&nbsp;</div>
 						<div id="info" align="center">
-							<a href="idFind.jsp" class="id">아이디 찾기</a>/<a href="idFind.jsp"
+							<a href="#" class="id">아이디 찾기</a>/<a href="#"
 								class="pw">비밀번호 찾기</a>
 						</div>
 					</form>
@@ -145,7 +156,6 @@
 	</div>
 	<!--End Modal-->
 
-</div>
 </div>
 <!-- 본문 끝 -->
 <jsp:include page="footer.jsp" />

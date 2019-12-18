@@ -8,7 +8,7 @@
 <body>
 	<%
 		session.invalidate();
-	%>	
+	%>
 	<script>
 		location.href = 'main.jsp';
 	</script>
