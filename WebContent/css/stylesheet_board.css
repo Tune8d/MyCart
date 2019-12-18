@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+body > .container {
+  padding: 55px 2px 0;
+}
+
+.backgroundimg{
+	background-image: url("../images/back2.png");
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	height: 93vh;
+	width: 99vw;
+}
+
+.menu_button {
+    min-width: 170px !important;
+    max-width: 200px !important;
+}
+
+.navbar-brand{
+	font-size: 16px;
+	font-family:"Century Gothic", serif;
+	color: #000000;
+}
+
+
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+	background-color: #c8c8c8;
+	color: #333333;
+}
+
+.wrapper {
+  min-height: 100%;
+
+  /* Equal to height of footer */
+  /* But also accounting for potential margin-bottom of last child */
+  margin-bottom: -50px;
+}
+
+#main{
+	position: absolute;
+	top: 40%;
+	left: 54%;
+	transform: translate(-55%, -45%);
+}
+
+.btn-group-lg {
+    width:0px;
+    padding:5px;
+}
+
+.action{
+	background-color: #dddddd;
+}
+
+
+input:focus {
+	text-align: left;
+	background-color: #daedf3;
+}
