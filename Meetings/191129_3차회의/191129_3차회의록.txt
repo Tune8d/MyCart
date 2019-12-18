@@ -1,0 +1,51 @@
+11292019 3차회의록
+
+1. 프로젝트 규모 합의
+- MVC 파일 가짓수 기준 최대 10개로 설정
+ * 프로젝트 진행현황 및 코딩 밀도에 따라 변경 가능
+
+2. 2차회의 피드백
+- 예지)
+   a. 문제제기: 예상외로 StockX 의 고도화된 서비스로 인해 기존에 논의했던 아이디어가 불필요해짐 
+   b. 대응방안: jQuery Toggle 기능 추가를 통한 시각화 요소 추가, 자산적인 면모에 초점을 둔 지표 형성       
+- 지은)
+   a. 문제제기: 밀도높은 기능과 고도화된 디자인으로 구성되어 벤치마킹만으로도 벅참
+   b. 대응방안: 개인별 개발역량을 고려한 기획 단순화 필요
+- 병권)
+   a. 문제제기: (지은 의견 동참)
+   b. 대응방안: 비딩기능에 집중된 단순화된 기능 구현
+- 동언)
+   a. 문제제기: 사전조사가 선행되지 못하여 2차 회의가 생산적이지 못함 
+   b. 대응방안: 향후 자료조사 필요시 보다 철저히 수행, 작업량 우려되나 StockX 를 DB로 삼아 시각화 자료 작성제안
+- 승주)
+   a. 문제제기: 예상보다 고도화된 서비스로 인해 소비자의 불편사항이 오히려 적어보여서 기획의도와 어긋남
+   b. 기획점검: 다만 성장중인 서비스이고 금융과 실물이라는 이질적인 성향을 지닌 재화를 공급하는데 있어 결함이 있을 것으로 예상 
+   c. 자료조사: 기업 및 금융 정보를 제공하는 DART 전자공시 홈페이지와 다양한 상품을 유통하는 Amazon 홈페이지 UI 진단 후 StockX 웹 UI 재점검    
+   d. 조사결과: StockX 웹서비스 내 보완할 사항 3가지 발견 (각각 사진1, 사진2, 사진3 참조)
+       1) <사진1>: StockX 내 등재된 모든 포트폴리오의 시장가의 총합값이 자릿수제한으로 정확하게 산정되지 않아 보임(https://stockx.com/portfolios)
+       2) <사진2>: 시장관리를 위해 회원당 한개의 포트폴리오로 생성 제한
+       3) <사진3>: 상품검색시 적용한 필터 저장 기능 부재   
+   e. 분석내용: 
+       1) 수정과 추가가 용이한 Amazon 의 장바구니 처럼 StockX 이용자의 2개 이상의 자유로운 포트폴리오 기획을 위한 장바구니 보관 기능 구현 필요 
+       2) DART 전자공시 홈페이지의 회원별 자료검색식 저장기능처럼 개성적인 상품정보에 걸맞게 이용자의 검색 성향을 고려한 검색조건 저장 기능 제공 필요 
+   f. 주요 기능 구현방안: 
+       1) e-1 의 경우, jQuery DataTable(https://datatables.net/) 활용 예정
+       2) e-2 의 경우, jQuery DataTable(https://www.flynsarmy.com/2011/12/save-custom-filter-state-jquery-data-tables/) 및 
+           주소값 활용(https://laracasts.com/discuss/channels/laravel/is-it-possible-to-store-query-on-session) 활용 예정
+3. 이후 일정계획
+  - JSP 및 Ajax 시험대비 (12/3(화) 오전) -> github 는 사용하면서 친숙화
+  - 화요일 오후부터 프로젝트 시작 
+   
+4. 기타 참고자료
+  - jsp 게시판 생성 flow (다른글에 기능별 구현 설명 있음)
+http://blog.naver.com/PostView.nhn?blogId=simpolor&logNo=220909599530&categoryNo=59&parentCategoryNo=0&viewDate=&currentPage=2&postListTopCurrentPage=1&from=search&userTopListOpen=true&userTopListCount=10&userTopListManageOpen=false&userTopListCurrentPage=2
+  - 게시글 검색기능 
+https://all-record.tistory.com/129
+  - HTML5 Canvas 차트 레이아웃 라이브러리
+https://canvasjs.com/
+  - 페이지 목차 알고리즘
+https://okky.kr/article/282819
+  - 자료구조 및 알고리즘 기초
+https://www.geeksforgeeks.org/data-structures/
+https://www.geeksforgeeks.org/fundamentals-of-algorithms/
+
