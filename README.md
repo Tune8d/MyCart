@@ -16,22 +16,19 @@ MyCart 는 한정판 프리미엄 패션물품 판매 서비스인 [StockX](http
   - &rarr; 저장된 정보를 StockX 서비스 내재화 가능한 방법 모색
 
 ## 개발환경
-* 사용언어
-  - Java(JSP), JS
+* 운영환경
+  - Apache Tomcat 9.0
+* 사용기술
+  - JAVA8, servlet, model2, HTML5, CSS3, Javascript, jQuery, JDBC(Oracle)
 * IDE
   - Eclipse
-  - JDK, JRE 
-* DB
-  - Oracle 11g 
-* Server
-  - Tomcat 9.0
   
-## 개발일정
-* ~12/1(일) : 사전준비
+## 개발기간: 10일
+* ~12/1(일) : 사전준비 (Meeting 폴더 참조)
   - 주제 선정: 11/28 의견 수렴 후 결정
   - gitHub 강의 수료
   - 업무분담 계획 조율
-* 12/2(월)~12/5(목) : 로그인 모듈 구현
+* 12/3(화)~12/5(목) : 로그인 모듈 구현
 * 12/6(금) : 1차 점검
   - 진행현황 점검 및 향후 업무계획 논의
 * 12/10(화) ~ 12/11(수): MyCart 모듈 작업
